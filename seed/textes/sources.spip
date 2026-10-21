@@ -1,0 +1,27 @@
+{{{Le périmètre de ce petit guide}}}
+
+Les références renvoient au dépôt d’origine [spip/docs->https://git.spip.net/spip/docs], branche main. Ce guide s’appuie sur la documentation consultée le {{20 octobre 2026}}. Le dépôt présente SPIP 5.0 comme une version en développement. Les noms, signatures et modalités de migration peuvent encore évoluer.
+
+Ce guide explique les notions utiles pour commencer à lire la documentation. Il ne remplace ni les prérequis de migration, ni les contrôles de compatibilité d’un plugin. Les orientations de la feuille de route sont distinguées du fonctionnement déjà décrit.
+
+{{{La documentation SPIP utilisée}}}
+
+<sources_doc|>
+
+{{{Les notions Symfony}}}
+
+<lecture|question=Documentation officielle Symfony|titre=Services et injection de dépendances|lien=https://symfony.com/doc/current/service_container.html>
+
+<lecture|question=Documentation officielle Symfony|titre=Événements et listeners|lien=https://symfony.com/doc/current/event_dispatcher.html>
+
+<lecture|question=Documentation officielle Symfony|titre=Objets Request et Response|lien=https://symfony.com/doc/current/components/http_foundation.html>
+
+La documentation Symfony « current » décrit une application ou un composant Symfony dans son contexte général. Les conventions propres à SPIP se vérifient dans les sources SPIP, notamment pour les attributs des pipelines.
+
+{{{Les exemples et ta progression}}}
+
+Les morceaux de code montrent une idée isolée ; ils ne forment pas un plugin prêt à installer. Les démonstrations fonctionnent uniquement dans cette page : elles n’exécutent pas PHP et n’envoient ni message ni requête à un site SPIP.
+
+Les leçons cochées et la fiche de repères sont mémorisées dans ce navigateur lorsque son stockage local est disponible. La navigation reste utilisable sans ce stockage.
+
+<reinitialiser_progression|>

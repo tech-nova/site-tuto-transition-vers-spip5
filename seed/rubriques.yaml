@@ -1,0 +1,116 @@
+# Arborescence du site. Chaque rubrique a un article d'accueil.
+# Dans les textes, « ->rubrique:cle » désigne une rubrique par sa clé.
+#
+# - Secteur « parcours » : son article d'accueil fournit la page d'accueil,
+#   ses sous-rubriques sont les étapes (descriptif = résumé de l'étape,
+#   surtitre = thème, chapo = accroche, ps = idée à retenir).
+# - Secteur « sources » : la page « Sources & méthode ».
+
+- cle: parcours
+  titre: '1. Le parcours'
+  url: parcours
+  article:
+    surtitre: 'De SPIP à Symfony, en douceur'
+    titre: 'Symfony, en terrain connu.'
+    chapo: 'Tu sais déjà développer avec SPIP. Partons de là pour comprendre ses nouvelles briques, une idée à la fois.'
+    texte: accueil.spip
+  rubriques:
+    - cle: pourquoi
+      titre: '01. Pourquoi Symfony ?'
+      url: pourquoi
+      descriptif: 'Les problèmes concrets que résolvent les composants Symfony.'
+      article:
+        surtitre: 'LE SENS AVANT LA SYNTAXE'
+        titre: 'Pourquoi changer les outils ?'
+        chapo: 'Partons d’un plugin qui grandit, plutôt que d’une liste de nouveaux mots.'
+        texte: pourquoi.spip
+        ps: 'SPIP adopte des outils communs pour rendre les dépendances et les points d’extension plus explicites. Tes repères SPIP restent utiles.'
+      liens:
+        - ['https://git.spip.net/spip/docs/-/blob/main/docs/fr/5.0/index.md', 'Vue d’ensemble de SPIP 5.0']
+        - ['https://git.spip.net/spip/docs/-/blob/main/docs/fr/5.0/features/services-symfony.md', 'Pourquoi utiliser les services ?']
+        - ['https://git.spip.net/spip/docs/-/blob/main/docs/fr/5.0/architecture/feuille-de-route.md', 'État actuel et orientations futures']
+
+    - cle: services
+      titre: '02. Services & conteneur'
+      url: services
+      descriptif: 'Comprendre l’injection avec un journal que l’on peut remplacer.'
+      article:
+        surtitre: 'LES OUTILS ET LEUR ASSEMBLAGE'
+        titre: 'Qui prépare les outils de ton code ?'
+        chapo: 'Service, dépendance, injection, conteneur : quatre mots pour une seule idée progressive.'
+        texte: services.spip
+        ps: 'Le service fait le travail. L’injection lui fournit ses outils. Le conteneur organise cet assemblage.'
+      liens:
+        - ['https://git.spip.net/spip/docs/-/blob/main/docs/fr/5.0/features/services-symfony.md', 'Services et injection de dépendances']
+        - ['https://git.spip.net/spip/docs/-/blob/main/docs/fr/5.0/guides/services-plugin.md', 'Déclarer les services d’un plugin']
+        - ['https://git.spip.net/spip/docs/-/blob/main/docs/fr/5.0/features/plugins-et-conteneur.md', 'Plugins et compilation du conteneur']
+        - ['https://symfony.com/doc/current/service_container.html', 'Symfony : conteneur de services']
+
+    - cle: facade
+      titre: '03. La façade Spip'
+      url: facade
+      descriptif: 'Lire Spip:: et comprendre quand préférer l’injection.'
+      article:
+        surtitre: 'FAIRE LE LIEN AVEC L’EXISTANT'
+        titre: 'Un guichet pour le code que tu connais.'
+        chapo: 'Un point d’accès pratique pendant la transition, avec un rôle précis.'
+        texte: facade.spip
+        ps: 'La façade est un point d’accès commode pour le code procédural. Dans les nouvelles classes, préfère des dépendances injectées et visibles.'
+      liens:
+        - ['https://git.spip.net/spip/docs/-/blob/main/docs/fr/5.0/features/acces-services-spip.md', 'Façade Spip et entrées HTTP']
+        - ['https://git.spip.net/spip/docs/-/blob/main/docs/fr/5.0/guides/acces-services-spip.md', 'Utiliser la façade Spip']
+
+    - cle: evenements
+      titre: '04. Pipelines & événements'
+      url: evenements
+      descriptif: 'Faire le lien entre pipeline, event, listener et dispatcher.'
+      article:
+        surtitre: 'LES POINTS D’EXTENSION'
+        titre: '« À ce moment-là, laisse-moi intervenir. »'
+        chapo: 'Tu connais déjà l’idée des événements : les pipelines sont ton meilleur repère.'
+        texte: evenements.spip
+        ps: 'L’événement transporte les données. Le dispatcher appelle les listeners. Le pipeline SPIP reste ton point de repère.'
+      liens:
+        - ['https://git.spip.net/spip/docs/-/blob/main/docs/fr/5.0/features/event-dispatcher-et-pipelines.md', 'Événements et pipelines']
+        - ['https://git.spip.net/spip/docs/-/blob/main/docs/fr/5.0/guides/pipelines-plugins.md', 'Listeners dans un plugin']
+        - ['https://git.spip.net/spip/docs/-/blob/main/docs/fr/5.0/guides/migration/pipelines.md', 'Cohabitation et migration des appels']
+        - ['https://symfony.com/doc/current/event_dispatcher.html', 'Symfony : événements et listeners']
+
+    - cle: http
+      titre: '05. Le trajet d’une page'
+      url: http
+      descriptif: 'Request, Response, contrôleur et noyau sur un schéma pas à pas.'
+      article:
+        surtitre: 'LE CYCLE D’UNE REQUÊTE'
+        titre: 'Une requête entre. Une réponse sort.'
+        chapo: 'Le vocabulaire HTTP devient plus concret avec le trajet d’une visite.'
+        texte: http.spip
+        ps: 'Request représente ce qui arrive. Response représente ce qui repart. Le noyau HTTP coordonne le traitement, avec encore beaucoup de code SPIP historique.'
+      liens:
+        - ['https://git.spip.net/spip/docs/-/blob/main/docs/fr/5.0/architecture/cycle-applicatif-http.md', 'Cycle applicatif HTTP']
+        - ['https://git.spip.net/spip/docs/-/blob/main/docs/fr/5.0/features/http-request-response.md', 'Objets Request et Response']
+        - ['https://symfony.com/doc/current/components/http_foundation.html', 'Symfony : HttpFoundation']
+
+    - cle: premier-pas
+      titre: '06. Mon premier pas'
+      url: premier-pas
+      descriptif: 'Un petit exercice et une fiche de repères pour la suite.'
+      article:
+        surtitre: 'DU VOCABULAIRE À LA PRATIQUE'
+        titre: 'Commencer petit, comprendre vraiment.'
+        chapo: 'Tu n’as pas besoin d’apprendre tout Symfony avant d’ouvrir un plugin.'
+        texte: premier-pas.spip
+        ps: 'Un premier service et une dépendance suffisent pour expérimenter. Tu peux revenir aux autres briques au moment où ton plugin en a besoin.'
+      liens:
+        - ['https://git.spip.net/spip/docs/-/blob/main/docs/fr/5.0/guides/services-plugin.md', 'Configurer les services d’un plugin']
+        - ['https://git.spip.net/spip/docs/-/blob/main/docs/fr/5.0/guides/pipelines-plugins.md', 'Pipelines dans les plugins']
+        - ['https://git.spip.net/spip/docs/-/blob/main/docs/fr/5.0/guides/migration/prerequis.md', 'Prérequis de migration']
+
+- cle: sources
+  titre: '2. Sources & méthode'
+  url: sources
+  article:
+    surtitre: 'SOURCES & MÉTHODE'
+    titre: 'Des repères simples. Des sources visibles.'
+    chapo: 'Ce guide est une introduction pédagogique indépendante, construite à partir du dépôt de documentation indiqué et des documentations officielles Symfony.'
+    texte: sources.spip

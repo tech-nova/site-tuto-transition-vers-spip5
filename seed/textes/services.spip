@@ -1,0 +1,66 @@
+{{{D’abord, un objet PHP}}}
+
+Une {{classe}} décrit un objet : les informations qu’il garde et les actions qu’il sait faire. Un {{objet}} est un exemplaire concret de cette classe. Une fonction attachée à un objet s’appelle une {{méthode}}.
+
+Un [?service#lexique] est simplement un objet auquel on confie une tâche dans l’application : écrire un log, lire une configuration, transformer un contenu. Ce n’est ni un serveur, ni obligatoirement un service web.
+
+<depliant|titre=Petit décodeur de la syntaxe objet>
+
+-* `class Traceur`
+_ Définit la classe Traceur.
+-* `new Traceur(...)`
+_ Crée un objet de cette classe.
+-* `$objet->signaler()`
+_ Appelle sa méthode signaler.
+-* `__construct(...)`
+_ Le constructeur reçoit ce qu’il faut au moment de créer l’objet.
+-* `use Psr\Log\LoggerInterface;`
+_ Permet d’utiliser le nom court LoggerInterface. `use` ne charge pas le fichier : l’autoload s’en occupe.
+
+<depliant|fin>
+
+{{{L’injection : recevoir ce dont on a besoin}}}
+
+Notre objet Traceur doit écrire un message. Il lui faut donc un {{journal}}, ou {logger}. Ce journal est sa [?dépendance#lexique].
+
+Au lieu de fabriquer lui-même son journal ou d’aller le chercher dans une variable globale, Traceur le reçoit dans son constructeur. C’est l’[?injection de dépendances#lexique].
+
+<legende_code|titre=Un service PHP, volontairement petit|legende=Fragment pédagogique : la classe devra être chargée et déclarée comme service dans le plugin.>
+
+```php
+namespace MonPlugin;
+
+use Psr\Log\LoggerInterface;
+
+final class Traceur
+{
+    public function __construct(private LoggerInterface $logger) {}
+
+    public function signaler(): void
+    {
+        $this->logger->info('Article publié.');
+    }
+}
+```
+
+-# {{LoggerInterface}} décrit un contrat commun : le journal doit notamment savoir recevoir un message `info()`.
+-# {{__construct(...)}} reçoit le journal et le conserve dans `$this->logger`. Le mot `private` réserve cette propriété à la classe.
+-# {{signaler()}} utilise ce journal. Il n’a pas besoin de savoir où le message sera stocké.
+
+{{{Essaie : change le journal, garde le même service}}}
+
+Un journal de test peut garder les messages en mémoire. La classe Traceur garde exactement le même code.
+
+<manipuler_service|>
+
+{{{Le conteneur : celui qui fait l’assemblage}}}
+
+Sans framework, tu pourrais écrire `new Traceur($journal)`. Mais quand cinquante objets ont besoin les uns des autres, quelqu’un doit garder les recettes de construction.
+
+Le [?conteneur de services#lexique] remplit ce rôle : il sait quels objets fournir et comment les préparer. Dans SPIP 5, les classes d’un plugin peuvent être enregistrées via `config/services.php`.
+
+<colonnes|variante=definitions|titre1=Autowiring|texte1=Le conteneur lit les {{types demandés}} dans le constructeur pour choisir les services à injecter.|titre2=Autoconfiguration|texte2=Les règles configurées reconnaissent le {{rôle}} de certaines classes ou méthodes, par exemple un listener marqué avec un attribut.>
+
+<encadre|etiquette=CE N’EST PAS DE LA MAGIE|texte=Les classes doivent être connues du conteneur. Une interface ambiguë ou une simple chaîne de caractères peut demander une configuration explicite. Autowiring et autoconfiguration sont deux mécanismes différents.>
+
+SPIP prépare un conteneur compilé à partir du cœur et des plugins actifs avant le traitement HTTP. Il peut réutiliser ce résultat ; activer un plugin peut entraîner sa recompilation. Ce conteneur PHP n’a rien à voir avec un conteneur Docker ou LXC.

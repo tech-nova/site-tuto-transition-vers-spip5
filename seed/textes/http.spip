@@ -1,0 +1,31 @@
+{{{Mettre des objets sur les échanges HTTP}}}
+
+Le navigateur demande une URL et envoie parfois des paramètres, des en-têtes ou un formulaire. L’objet [?Request#lexique] rassemble ces informations. L’objet [?Response#lexique] rassemble ce qui revient : un contenu, un code de statut et des en-têtes.
+
+Le composant Symfony qui fournit ces objets s’appelle {{HttpFoundation}}. Le noyau HTTP organise le traitement de la requête pour obtenir une réponse.
+
+<manipuler_trajet|>
+
+{{{Contrôleur et kernel, sans mystère}}}
+
+Un {{contrôleur}} est du code appelé pour traiter une route. Dans l’architecture décrite, le contrôleur SPIP peut déléguer au traitement historique. Une route fait le lien entre une URL et le code à appeler.
+
+{{Kernel}} signifie « noyau ». Attention : les noms voisins recouvrent ici deux rôles. Le noyau de démarrage prépare notamment le conteneur ; le {{noyau HTTP}} prend en charge la requête. Tu n’as pas besoin de mémoriser toutes leurs classes pour écrire ton premier service.
+
+<encadre|etiquette=LE CODE HISTORIQUE RESTE PRÉSENT|texte=Une partie importante des pages, formulaires et squelettes passe encore par le code historique de SPIP. Sa sortie est souvent capturée dans un tampon puis placée dans une Response. Une enveloppe HTTP moderne ne signifie pas que tout a été réécrit.>
+
+{{{Un objet réponse, en trois informations}}}
+
+<legende_code|titre=Exemple HttpFoundation — hors intégration d’une route SPIP|legende=Créer cet objet ne l’envoie pas tout seul au navigateur. Le cycle HTTP doit encore le prendre en charge.>
+
+```php
+use Symfony\Component\HttpFoundation\Response;
+
+$reponse = new Response(
+    '<p>Bonjour SPIP !</p>',  // le contenu
+    200,                    // le statut HTTP
+    ['Content-Type' => 'text/html; charset=UTF-8']
+);
+```
+
+Le gain est une représentation commune des réponses : on peut les examiner ou les modifier sans dépendre uniquement de `echo` et de `header()` dispersés. Ces objets ne remplacent pas la validation des entrées ni les contrôles d’accès.

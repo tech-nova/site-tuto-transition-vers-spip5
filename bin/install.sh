@@ -85,8 +85,14 @@ for prefixe in "${PLUGINS[@]}"; do
 		spip plugins:svp:telecharger "$prefixe" -y
 	fi
 done
-spip plugins:activer "${PLUGINS[@]}" tuto -y
+# Tous les plugins téléchargés (ceux du site et leurs dépendances), puis le nôtre
+mapfile -t telecharges < <(ls plugins/auto)
+spip plugins:activer "${telecharges[@]}" tuto -y
 spip plugins:maj:bdd
+# Un plugin installé par SVP dans le même processus que son téléchargement
+# n'a pas encore ses déclarations de tables chargées (cas d'article_accueil) :
+# on complète les colonnes manquantes de toutes les tables déclarées.
+spip php:eval 'include_spip("base/create"); maj_tables(array_keys(lister_tables_principales()));'
 ouvrir_droits
 
 etape "Contenu initial"

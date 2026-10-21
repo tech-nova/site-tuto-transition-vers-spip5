@@ -1,0 +1,38 @@
+{{{Un plugin simple. Puis un peu moins simple.}}}
+
+Imagine un plugin qui signale qu’un article a été publié. Au début, une fonction suffit. Puis il faut lire une configuration, écrire dans les logs, réagir à un pipeline, tester le tout… Le code finit par dépendre de choses qui ne sont pas visibles dans ses arguments.
+
+<colonnes|etiquette1=LE PROBLÈME|titre1=« De quoi cette fonction a-t-elle besoin ? »|texte1=Il faut parfois explorer les inclusions, les variables globales et l’ordre de chargement pour le découvrir.|etiquette2=LA DIRECTION|titre2=Des besoins déclarés, des rôles séparés.|texte2=Une classe annonce ses besoins. Un outil les assemble. Un événement permet aux plugins de réagir.>
+
+Ces difficultés ne sont pas propres à SPIP. Symfony fournit des bibliothèques PHP qui aident à y répondre.
+
+{{{Symfony : une boîte à outils, et aussi un framework}}}
+
+Un {{framework}} propose une organisation commune pour construire une application. Symfony existe aussi sous forme de {{composants}} : des bibliothèques utilisables séparément dans une application PHP.
+
+<composants|principal=SPIP 5|elements=Conteneur de services, Event Dispatcher, HTTP>
+
+Dans le dépôt étudié, SPIP 5 utilise notamment ces composants. Il conserve une grande partie de son fonctionnement historique derrière cette nouvelle organisation.
+
+<encadre|etiquette=LE REPÈRE ESSENTIEL|texte=Apprendre ces briques ne demande pas de commencer par une application Symfony standard. Les notions Twig, Doctrine ou bundles ne sont pas des prérequis pour suivre ce guide.>
+
+{{{Ce qu’on y gagne concrètement}}}
+
+-# {{Des dépendances visibles}}
+_ On voit ce dont une classe a besoin, et on peut lui fournir un autre outil pour un test.
+-# {{Des extensions plus faciles à isoler}}
+_ Une méthode peut traiter un événement précis, avec des données décrites par une classe plutôt qu’un tableau à deviner.
+-# {{Des briques et des conventions partagées}}
+_ Les composants Symfony et les interfaces communes rapprochent le code SPIP d’autres projets PHP. Cela facilite la lecture d’exemples, le réemploi et l’outillage.
+
+Le coût est réel : de nouveaux fichiers, des types à comprendre et une configuration plus explicite. Cela devient utile quand le code doit évoluer, être testé ou être réutilisé. Le nom d’un framework ne garantit à lui seul ni la qualité du code, ni un gain de vitesse.
+
+{{{Ce que tu connais reste un point d’appui}}}
+
+|{{Ton repère SPIP}}|{{La nouvelle idée à découvrir}}|
+|Une fonction qui rend un service|Un objet appelé {{service}}|
+|Charger et préparer les outils nécessaires|Le {{conteneur}} assemble les objets|
+|Intervenir dans un pipeline|Un {{listener}} réagit à un événement|
+|Lire une entrée, produire une page|Des objets {{Request}} et {{Response}}|
+
+{Ce sont des rapprochements pour comprendre, pas des équivalences automatiques entre fonctions et classes.}

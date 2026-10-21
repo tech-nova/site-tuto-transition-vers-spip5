@@ -1,0 +1,65 @@
+{{{Un premier exercice dans un environnement de développement}}}
+
+Choisis une petite fonction de ton plugin qui écrit un log ou transforme une chaîne. L’objectif est de comprendre une dépendance et son branchement, pas de migrer tout le plugin d’un coup.
+
+-# {{Repère une seule responsabilité}}
+_ « Signaler une action » est assez petit. Évite de partir du démarrage complet de ton plugin ou de l’envoi de tous ses courriels.
+-# {{Écris une classe qui reçoit son outil}}
+_ Tu peux reprendre Traceur de la leçon 2. Relis le constructeur : le besoin du service doit être visible.
+-# {{Fais connaître la classe au conteneur}}
+_ Le plugin déclare son autoload PSR-4 et charge ses services dans `config/services.php`. Les deux ont des rôles différents.
+-# {{Vérifie d’abord une action minuscule}}
+_ Contrôle le message reçu par le journal. Pour déclencher la classe depuis un pipeline, suis ensuite le guide des listeners.
+
+{{{Les deux branchements à ne pas confondre}}}
+
+<colonnes|variante=definitions|etiquette1=TROUVER LA CLASSE|titre1=Autoload / PSR-4|texte1=Fait correspondre un nom de classe à un fichier. Par exemple, le préfixe `MonPlugin\` pointe vers le dossier `src/`.|etiquette2=ASSEMBLER LES OBJETS|titre2=Conteneur de services|texte2=Enregistre les classes utilisables comme services et prépare leurs dépendances. Trouver le fichier ne suffit pas à enregistrer le service.>
+
+<depliant|titre=Voir les petits fichiers de configuration>
+
+<legende_code|titre=composer.json du plugin — extrait autoload>
+
+```json
+{
+  "autoload": {
+    "psr-4": { "MonPlugin\\": "src/" }
+  }
+}
+```
+
+<legende_code|titre=config/services.php du plugin|legende=Même namespace que la classe Traceur. Ce sont des fragments de configuration, pas un paquet de plugin complet.>
+
+```php
+<?php
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return static function (ContainerConfigurator $container): void {
+    $container->services()
+        ->defaults()
+        ->autowire()
+        ->autoconfigure()
+        ->load('MonPlugin\\', '../src/');
+};
+```
+
+{Le guide du dépôt décrit aussi le rafraîchissement du cache de démarrage après une modification des services. Consulte-le pour les commandes adaptées à la version testée.}
+
+<depliant|fin>
+
+<encadre|etiquette=COMPOSER ET SVP N’ONT PAS LE MÊME RÔLE|texte=Composer gère les dépendances PHP. Selon le dépôt, l’activation via SVP prend en charge l’autoload du plugin mais n’installe pas automatiquement toutes les dépendances de son `require`. Vérifie le mode d’installation avant d’ajouter une bibliothèque.>
+
+{{{Ta fiche de repères}}}
+
+Coche les idées que tu saurais maintenant expliquer avec tes propres mots. Ce sont des repères de lecture, pas un examen.
+
+<fiche_reperes|repere1=Un service est un objet auquel on confie une tâche.|repere2=L’injection fournit à cet objet les outils dont il a besoin.|repere3=La façade Spip aide le code procédural ; une classe peut préférer l’injection.|repere4=Un événement porte les données ; les listeners réagissent grâce au dispatcher.|repere5=Utiliser des composants Symfony ne signifie pas adopter toute une application Symfony standard.>
+
+{{{Ensuite, lis la documentation avec une question précise}}}
+
+<lecture|question=« Comment déclarer ma classe ? »|titre=Configurer les services d’un plugin|lien=https://git.spip.net/spip/docs/-/blob/main/docs/fr/5.0/guides/services-plugin.md>
+
+<lecture|question=« Comment réagir à un pipeline ? »|titre=Créer un listener|lien=https://git.spip.net/spip/docs/-/blob/main/docs/fr/5.0/guides/pipelines-plugins.md>
+
+<lecture|question=« Mon environnement est-il prêt ? »|titre=Vérifier les prérequis|lien=https://git.spip.net/spip/docs/-/blob/main/docs/fr/5.0/guides/migration/prerequis.md>
+
+SPIP 5.0 est en développement dans les sources consultées. Avant une migration réelle, vérifie la version de PHP demandée, les dépendances et les ruptures documentées. Comprendre ces concepts est une première étape ; la compatibilité de chaque plugin se vérifie séparément.

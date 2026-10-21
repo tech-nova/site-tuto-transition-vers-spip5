@@ -1,0 +1,150 @@
+# Groupe de mots-clés « Lexique », lié aux rubriques.
+# definition → descriptif du mot, analogie → texte du mot,
+# etapes → rubriques auxquelles le mot est lié (« Revoir dans le parcours »).
+# Dans les textes, [?terme#lexique] renvoie vers le mot correspondant.
+groupe: 'Lexique'
+mots:
+  - cle: classe
+    titre: 'Classe / objet'
+    synonymes: 'class, object'
+    definition: 'Une classe décrit un type d’objet. Un objet est un exemplaire concret de cette classe. Ses fonctions s’appellent des méthodes.'
+    analogie: 'Un plan d’outil, puis l’outil que l’on utilise.'
+    etapes: [services]
+  - cle: service
+    titre: 'Service'
+    synonymes: 'service'
+    definition: 'Un objet PHP auquel l’application confie une tâche. Il peut écrire un log ou lire une configuration. Ce n’est pas forcément un appel à un site externe.'
+    analogie: 'Un outil spécialisé du plugin.'
+    etapes: [services]
+  - cle: dependance
+    titre: 'Dépendance'
+    synonymes: 'dependency'
+    definition: 'Ce dont un morceau de code a besoin pour fonctionner : un journal, une configuration, un autre service…'
+    analogie: 'L’outil qu’il lui faut pour faire son travail.'
+    etapes: [services]
+  - cle: injection
+    titre: 'Injection de dépendances'
+    synonymes: 'dependency injection, DI'
+    definition: 'Fournir à un objet ses dépendances depuis l’extérieur, souvent dans son constructeur, au lieu de le laisser les fabriquer ou les chercher.'
+    analogie: 'Lui donner ses outils au départ.'
+    etapes: [services]
+  - cle: conteneur
+    titre: 'Conteneur de services'
+    synonymes: 'service container, dependency injection container'
+    definition: 'L’outil qui connaît les services et les recettes pour créer leurs objets et leur fournir leurs dépendances. Ici, aucun rapport avec Docker ou LXC.'
+    analogie: 'L’atelier qui prépare et assemble les outils.'
+    etapes: [services]
+  - cle: autowiring
+    titre: 'Autowiring'
+    synonymes: 'autocâblage, automatic wiring'
+    definition: 'Le conteneur utilise les types demandés dans les constructeurs pour déterminer les services à injecter, selon la configuration connue.'
+    analogie: 'Brancher les bons outils à partir de leurs prises.'
+    etapes: [services]
+  - cle: autoconfiguration
+    titre: 'Autoconfiguration'
+    synonymes: 'autoconfigure'
+    definition: 'Les règles configurées reconnaissent certains rôles à partir d’interfaces ou d’attributs et enregistrent le service en conséquence.'
+    analogie: 'Repérer l’étiquette « listener » sur une méthode.'
+    etapes: [services]
+  - cle: facade
+    titre: 'Façade Spip'
+    synonymes: 'facade, static helper'
+    definition: 'Un point d’accès commun aux services SPIP, avec des appels comme Spip::config() ou Spip::logger(). Il aide surtout le code procédural de transition.'
+    analogie: 'Le guichet qui t’oriente vers le bon service.'
+    etapes: [facade]
+  - cle: event
+    titre: 'Événement'
+    synonymes: 'event'
+    definition: 'Un objet qui porte les données d’un moment du traitement. Dans un pipeline typé, sa classe décrit les données accessibles.'
+    analogie: 'Le dossier transmis aux personnes concernées.'
+    etapes: [evenements]
+  - cle: listener
+    titre: 'Listener'
+    synonymes: 'écouteur, event listener'
+    definition: 'Du code qui réagit à un événement. Les listeners modernes de pipelines SPIP sont des méthodes de services enregistrées pour ce rôle.'
+    analogie: 'La personne qui intervient sur ce dossier.'
+    etapes: [evenements]
+  - cle: dispatcher
+    titre: 'Event Dispatcher'
+    synonymes: 'répartiteur, distributeur, dispatcher'
+    definition: 'Le mécanisme qui appelle les listeners enregistrés pour un événement. Il ne signifie pas, à lui seul, une exécution en arrière-plan.'
+    analogie: 'Le répartiteur qui transmet le dossier aux bons intervenants.'
+    etapes: [evenements]
+  - cle: attribut
+    titre: 'Attribut PHP'
+    synonymes: 'attribute, annotation, metadata'
+    definition: 'Une information structurée écrite avec #[...], que du code peut lire. SPIP peut ainsi reconnaître une méthode marquée #[AsPipelineListener].'
+    analogie: 'Une étiquette lisible par le mécanisme d’enregistrement.'
+    etapes: [evenements]
+  - cle: interface
+    titre: 'Interface'
+    synonymes: 'contract, contrat'
+    definition: 'Un contrat PHP qui décrit des méthodes à fournir. Plusieurs classes peuvent respecter la même interface ; la configuration choisit l’implémentation utilisée.'
+    analogie: 'Une prise standard compatible avec plusieurs outils.'
+    etapes: [services]
+  - cle: constructeur
+    titre: 'Constructeur'
+    synonymes: 'constructor, __construct'
+    definition: 'La méthode __construct() est appelée lors de la création d’un objet. Elle peut recevoir les dépendances de cet objet.'
+    analogie: 'La préparation de l’outil avant son utilisation.'
+    etapes: [services]
+  - cle: request
+    titre: 'Request'
+    synonymes: 'requête, HttpFoundation'
+    definition: 'Un objet Symfony HttpFoundation qui représente la requête HTTP : URL, paramètres, en-têtes, données envoyées…'
+    analogie: 'La demande qui arrive au site.'
+    etapes: [http]
+  - cle: response
+    titre: 'Response'
+    synonymes: 'réponse, HttpFoundation'
+    definition: 'Un objet qui représente une réponse HTTP avec un contenu, un statut et des en-têtes.'
+    analogie: 'Le colis que le site renvoie au navigateur.'
+    etapes: [http]
+  - cle: kernel
+    titre: 'Kernel'
+    synonymes: 'noyau, HttpKernel, bootstrap'
+    definition: 'Un noyau organise le démarrage ou le traitement. Dans les sources SPIP étudiées, le noyau de boot prépare le conteneur et le noyau HTTP coordonne la requête.'
+    analogie: 'La coordination, avec deux responsabilités à distinguer.'
+    etapes: [http]
+  - cle: controleur
+    titre: 'Contrôleur'
+    synonymes: 'controller, route, routing, routage'
+    definition: 'Du code appelé pour traiter une route. Dans SPIP 5, il peut encore déléguer au traitement historique.'
+    analogie: 'L’aiguillage entre une URL et le traitement à effectuer.'
+    etapes: [http]
+  - cle: namespace
+    titre: 'Namespace'
+    synonymes: 'espace de noms, use'
+    definition: 'Un préfixe qui organise les noms de classes et évite les collisions. use permet d’employer un nom plus court dans un fichier PHP.'
+    analogie: 'Une adresse complète pour distinguer deux classes du même nom.'
+    etapes: [premier-pas]
+  - cle: composer
+    titre: 'Composer'
+    synonymes: 'package manager, require, vendor, dépendances'
+    definition: 'Le gestionnaire de dépendances PHP : il résout et installe les bibliothèques déclarées dans composer.json et génère un autoload. Ce n’est pas le conteneur de services.'
+    analogie: 'La gestion des bibliothèques nécessaires au projet.'
+    etapes: [premier-pas]
+  - cle: psr4
+    titre: 'Autoload / PSR-4'
+    synonymes: 'autoloading, chargement automatique'
+    definition: 'Un mécanisme et une convention pour retrouver le fichier d’une classe à partir de son nom. Cela ne suffit pas à en faire un service enregistré.'
+    analogie: 'Le plan de rangement des fichiers de classes.'
+    etapes: [premier-pas]
+  - cle: psr
+    titre: 'PSR'
+    synonymes: 'PHP standard recommendation, PSR-3'
+    definition: 'Des recommandations communes dans l’écosystème PHP. Exemple ici : PSR-3 décrit une interface partagée pour les journaux ; PSR-4 concerne le chargement des classes.'
+    analogie: 'Des conventions pour que les bibliothèques s’accordent.'
+    etapes: [services]
+  - cle: connecteur
+    titre: 'Connecteur'
+    synonymes: 'connector, bridge, pont'
+    definition: 'Un mot général pour du code qui relie deux systèmes ou un service externe. Ce n’est pas un synonyme de conteneur de services ; son sens dépend du contexte.'
+    analogie: 'Un adaptateur entre deux systèmes.'
+    etapes: [services]
+  - cle: legacy
+    titre: 'Legacy'
+    synonymes: 'historique, ancien, compatibilité'
+    definition: 'Le code historique déjà présent dans SPIP. Le terme indique son origine et son intégration dans la transition, pas automatiquement un défaut de qualité.'
+    analogie: 'L’existant que la nouvelle organisation doit encore faire fonctionner.'
+    etapes: [http]

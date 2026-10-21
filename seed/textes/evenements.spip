@@ -1,0 +1,64 @@
+{{{Trois rôles, autour d’un événement}}}
+
+SPIP produit une page et atteint le pipeline `affichage_final`. Un plugin souhaite enrichir le HTML sans modifier le cœur. L’idée reste familière ; l’organisation évolue.
+
+<colonnes|variante=roles|titre1=L’événement|texte1=Un objet transporte les données liées à ce moment. Exemple : le HTML final d’une page.|code1=event|titre2=Le répartiteur|texte2=Il appelle les réactions enregistrées pour cet événement, dans l’ordre prévu.|code2=event dispatcher|titre3=La réaction|texte3=Une méthode de service intervient sur cet événement.|code3=listener>
+
+Dans SPIP 5, un pont relie les pipelines historiques à l’Event Dispatcher Symfony. La fonction `pipeline()` reste disponible. Ce mécanisme n’implique ni file de messages, ni tâche en arrière-plan : dans cette démonstration, les réactions se font pendant le même traitement.
+
+{{{Essaie : une page, deux réactions indépendantes}}}
+
+Choisis les listeners, puis déclenche le pipeline. Aucun plugin n’est installé : c’est une simulation du principe.
+
+<manipuler_evenements|>
+
+{{{De la fonction à la méthode de service}}}
+
+<code_bascule|onglet=Repère SPIP 4>
+
+<legende_code|titre=Fonction historique — déclaration de pipeline non montrée>
+
+```php
+function monplugin_affichage_final(string $html): string
+{
+    return str_replace(
+        '</body>',
+        '<footer>Fabriqué avec SPIP</footer></body>',
+        $html
+    );
+}
+```
+
+<code_bascule|onglet=Forme SPIP 5>
+
+<legende_code|titre=Méthode listener — classe à enregistrer comme service>
+
+```php
+namespace MonPlugin;
+
+use Spip\Framework\Pipeline\Event\AffichageFinalEvent;
+use SpipLeague\Bridge\Pipeline\Attribute\AsPipelineListener;
+
+final class SignatureListener
+{
+    #[AsPipelineListener]
+    public function ajouter(AffichageFinalEvent $event): void
+    {
+        $event->appendToBody('<footer>Fabriqué avec SPIP</footer>');
+    }
+}
+```
+
+<code_bascule|fin>
+
+`#[AsPipelineListener]` est un [?attribut PHP#lexique] : une information que SPIP lit pour enregistrer la méthode comme réaction. Ce n’est pas un commentaire décoratif. Le type `AffichageFinalEvent` permet ici de reconnaître le pipeline.
+
+La méthode agit sur l’objet événement. Elle ne renvoie pas le HTML avec `return`. L’attribut `AsPipelineListener` est propre à l’intégration SPIP ; un tutoriel Symfony peut montrer d’autres attributs.
+
+{{{Une transition, pas une conversion automatique}}}
+
+Les anciens appels et les fonctions de pipeline peuvent cohabiter avec les nouveaux listeners. Cela ne prouve pas qu’un plugin SPIP 4 fonctionne intégralement sans adaptation.
+
+<encadre|etiquette=TOUS LES PIPELINES NE SONT PAS ENCORE TYPÉS|texte=Lorsqu’il n’existe pas de classe dédiée à un pipeline, SPIP propose un événement générique `PipelineEvent`. Le nom du pipeline doit alors être fourni explicitement.>
+
+Un listener moderne doit être chargé comme service et reconnu par la configuration du plugin. Les déclarations historiques `<pipeline>` restent utiles aux fonctions legacy ; elles ne sont pas requises pour un listener moderne enregistré par attribut.

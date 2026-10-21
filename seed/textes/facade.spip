@@ -1,0 +1,33 @@
+{{{Le problème : plusieurs portes pour des besoins courants}}}
+
+Dans du code procédural, tu veux parfois simplement lire la configuration, récupérer une entrée HTTP ou écrire un log. La [?façade#lexique] `Spip` rassemble ces accès derrière un nom commun.
+
+Imagine un guichet d’accueil : il donne accès aux bons outils, sans faire lui-même tout leur travail. Cette façade est un outil de {{SPIP}}, pas une obligation générale de Symfony.
+
+<legende_code|titre=Dans du code procédural SPIP initialisé>
+
+```php
+$nom = Spip::config('nom_site');
+
+$id = Spip::input('id_article');
+
+Spip::logger('mon_plugin')->info('Article publié.');
+```
+
+-# `Spip::config(...)` lit une valeur de configuration.
+-# `Spip::input(...)` lit une entrée de la requête.
+-# `Spip::logger(...)` fournit un journal ; `->info(...)` lui confie un message.
+
+Les deux-points `::` indiquent ici un accès statique à la façade. La flèche `->` appelle une méthode sur l’objet journal retourné.
+
+{{{Façade ou injection : deux usages à distinguer}}}
+
+<colonnes|etiquette1=UNE FONCTION EXISTANTE|titre1=Un accès direct et lisible|texte1=La façade aide le code procédural de transition à accéder aux services communs, sans multiplier les fonctions globales.|code1=Spip::logger()-&gt;info('…');|etiquette2=UNE NOUVELLE CLASSE|titre2=Des besoins déclarés|texte2=Préfère recevoir le journal dans le constructeur. Tu vois la dépendance et tu peux la remplacer dans un test.|code2=$this-&gt;logger-&gt;info('…');>
+
+Une classe qui cherche tous ses outils avec `Spip::service(...)` cache une partie de ses besoins. Le conteneur reste utile, mais il est plus clair qu’il fournisse directement les dépendances à cette classe.
+
+{{{Ce que cet accès ne fait pas à ta place}}}
+
+<encadre|etiquette=LIRE N’EST PAS VALIDER|couleur=sable|texte=`Spip::input('id_article')` ne prouve pas que la valeur est un entier valide, ni que la personne a le droit de modifier cet article. Validation, autorisations et protection des sorties restent nécessaires.>
+
+La lecture des entrées dépend d’une requête HTTP active. Dans une commande CLI ou un test isolé, il faut tenir compte de ce contexte. La façade n’est pas un remplacement universel de tous les anciens appels SPIP.
