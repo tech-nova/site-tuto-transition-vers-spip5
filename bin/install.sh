@@ -35,7 +35,7 @@ etape() { printf '\n\033[1;35m==> %s\033[0m\n' "$*"; }
 # Répertoires où PHP (www-data) et la ligne de commande écrivent tous les deux
 ouvrir_droits() {
 	mkdir -p config IMG local tmp plugins/auto
-	chmod -R a+rwX config IMG local tmp plugins/auto
+	find config IMG local tmp plugins/auto -user "$(id -u)" -exec chmod a+rwX {} +
 }
 
 etape "spip-cli"
