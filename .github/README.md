@@ -19,7 +19,8 @@ Le script :
 1. clone spip-cli avec la [MR 91](https://git.spip.net/spip-contrib-outils/spip-cli/-/merge_requests/91)
    dans `.outils/spip-cli` (sauf si `SPIP_CLI` désigne un spip-cli existant) ;
 2. télécharge SPIP 4.4 (zip officiel : `spip dl` refuse un répertoire non vide) ;
-3. installe SPIP en SQLite avec le compte `gilles` / `adminadmin` ;
+3. installe SPIP en SQLite et crée un compte administrateur (`admin` par défaut,
+   avec un mot de passe aléatoire affiché à la fin si `ADMIN_PASS` n'est pas fourni) ;
 4. télécharge par SVP `tiptap_spip`, `coloration_code`, `inserer_modeles`,
    `article_accueil` et leurs dépendances, puis active le plugin du site ;
 5. crée le contenu avec `spip tuto:seed`.
@@ -27,7 +28,11 @@ Le script :
 Il peut être relancé : chaque étape déjà faite est sautée.
 
 Variables utiles : `SPIP_CLI` (exécutable spip-cli existant), `ADRESSE_SITE`,
-`ADMIN_LOGIN`, `ADMIN_PASS`, `ADMIN_EMAIL`.
+`ADMIN_LOGIN`, `ADMIN_PASS`, `ADMIN_EMAIL`. Par exemple :
+
+```bash
+ADMIN_LOGIN=moi ADMIN_PASS='un mot de passe' bin/install.sh
+```
 
 Le serveur web écrit dans `config/`, `IMG/`, `local/`, `tmp/` et `plugins/auto/` :
 le script ouvre ces répertoires en écriture à tous.

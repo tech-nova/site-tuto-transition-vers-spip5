@@ -13,6 +13,7 @@
 #   SPIP_CLI      exécutable spip-cli à utiliser (sinon clone dans .outils/)
 #   ADRESSE_SITE  URL publique du site (défaut : http://localhost:8760/)
 #   ADMIN_LOGIN, ADMIN_PASS, ADMIN_EMAIL : compte administrateur
+#                 (sans ADMIN_PASS, un mot de passe aléatoire est généré et affiché)
 
 set -euo pipefail
 
@@ -26,9 +27,9 @@ DEPOT_SVP="https://files.spip.net/spip-zone/archives.xml"
 PLUGINS=(tiptap_spip coloration_code inserer_modeles article_accueil)
 
 ADRESSE_SITE="${ADRESSE_SITE:-http://localhost:8760/}"
-ADMIN_LOGIN="${ADMIN_LOGIN:-gilles}"
-ADMIN_PASS="${ADMIN_PASS:-adminadmin}"
-ADMIN_EMAIL="${ADMIN_EMAIL:-gilles@localhost}"
+ADMIN_LOGIN="${ADMIN_LOGIN:-admin}"
+ADMIN_PASS="${ADMIN_PASS:-$(php -r 'echo bin2hex(random_bytes(8));')}"
+ADMIN_EMAIL="${ADMIN_EMAIL:-admin@localhost}"
 
 etape() { printf '\n\033[1;35m==> %s\033[0m\n' "$*"; }
 
@@ -65,7 +66,9 @@ ouvrir_droits
 grep -m1 'spip_version_branche =' ecrire/inc_version.php
 
 etape "Installation (SQLite, compte $ADMIN_LOGIN)"
+compte_cree=0
 if [[ ! -f config/connect.php ]]; then
+	compte_cree=1
 	spip core:installer \
 		--db-server=sqlite3 \
 		--db-database=spip \
@@ -100,4 +103,7 @@ spip tuto:seed
 spip cache:vider
 ouvrir_droits
 
-etape "Terminé : $ADRESSE_SITE (admin : $ADMIN_LOGIN)"
+etape "Terminé : $ADRESSE_SITE"
+if [[ $compte_cree == 1 ]]; then
+	echo "Compte administrateur : $ADMIN_LOGIN / $ADMIN_PASS"
+fi
