@@ -31,3 +31,6 @@
 
 # Outils locaux
 /.outils/
+
+# Logs nginx
+/log/
