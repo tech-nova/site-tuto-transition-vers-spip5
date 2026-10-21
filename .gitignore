@@ -1,0 +1,33 @@
+# Cœur SPIP et plugins-dist : téléchargés par bin/install.sh
+/CHANGELOG.md
+/LICENSE
+/README.md
+/SECURITY.md
+/composer.json
+/composer.lock
+/htaccess.txt
+/.htaccess
+/index.php
+/phpcs.xml.dist
+/plugins-dist.json
+/spip.php
+/spip.png
+/spip.svg
+/ecrire/
+/prive/
+/plugins-dist/
+/squelettes-dist/
+/vendor/
+
+# Plugins téléchargés par SVP
+/plugins/auto/
+
+# Données du site : recréées par l'installation et le seed
+/config/*
+!/config/mes_options.php
+/IMG/
+/local/
+/tmp/
+
+# Outils locaux
+/.outils/

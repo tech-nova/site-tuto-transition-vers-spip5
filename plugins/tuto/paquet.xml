@@ -1,0 +1,17 @@
+<paquet
+	prefix="tuto"
+	categorie="squelette"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[4.4.0;4.4.*]"
+	schema="1.0.0"
+>
+	<nom>SPIP, côté Symfony</nom>
+	<auteur>Gilles Vincent</auteur>
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="tiptap_spip" />
+	<necessite nom="coloration_code" />
+	<necessite nom="inserer_modeles" />
+	<necessite nom="article_accueil" />
+</paquet>
