@@ -1,0 +1,7 @@
+[(#REM)
+	Titre et légende du bloc de code qui suit immédiatement.
+	<legende_code|titre=Un service PHP, volontairement petit|legende=Fragment pédagogique…>
+	L'assemblage est fait par tuto_post_propre().
+]#SET{prive,#EVAL{test_espace_prive()}}
+[(#GET{prive}|oui)<div class="tuto-marqueur">Code : [(#ENV*{titre}|typo)][ — (#ENV*{legende}|typo)]</div>]
+[(#GET{prive}|non)<div class="tuto-legende-code" data-titre="[(#ENV*{titre}|typo|attribut_html)]" data-legende="[(#ENV*{legende}|typo|attribut_html)]"></div>]

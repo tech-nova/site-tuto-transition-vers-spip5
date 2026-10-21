@@ -1,0 +1,7 @@
+nom: 'Schéma : le trajet d’une page'
+categorie:
+  type: 'tuto_manipuler'
+  rang: 3
+parametres:
+  - saisie: 'hidden'
+    options: {nom: 'modele', defaut: 'manipuler_trajet'}

@@ -1,0 +1,19 @@
+nom: 'Fiche de repères à cocher'
+categorie:
+  type: 'tuto_manipuler'
+  rang: 4
+parametres:
+  - saisie: 'hidden'
+    options: {nom: 'modele', defaut: 'fiche_reperes'}
+  - saisie: 'input'
+    options: {nom: 'repere1', label: 'Repère 1', obligatoire: 'oui'}
+  - saisie: 'input'
+    options: {nom: 'repere2', label: 'Repère 2'}
+  - saisie: 'input'
+    options: {nom: 'repere3', label: 'Repère 3'}
+  - saisie: 'input'
+    options: {nom: 'repere4', label: 'Repère 4'}
+  - saisie: 'input'
+    options: {nom: 'repere5', label: 'Repère 5'}
+  - saisie: 'input'
+    options: {nom: 'repere6', label: 'Repère 6'}

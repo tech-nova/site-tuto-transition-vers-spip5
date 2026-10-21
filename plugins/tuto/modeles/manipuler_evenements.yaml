@@ -1,0 +1,7 @@
+nom: 'Simulateur : déclencher un pipeline'
+categorie:
+  type: 'tuto_manipuler'
+  rang: 2
+parametres:
+  - saisie: 'hidden'
+    options: {nom: 'modele', defaut: 'manipuler_evenements'}

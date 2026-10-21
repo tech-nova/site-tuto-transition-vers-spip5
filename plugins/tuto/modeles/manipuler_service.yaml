@@ -1,0 +1,7 @@
+nom: 'Simulateur : changer le journal injecté'
+categorie:
+  type: 'tuto_manipuler'
+  rang: 1
+parametres:
+  - saisie: 'hidden'
+    options: {nom: 'modele', defaut: 'manipuler_service'}

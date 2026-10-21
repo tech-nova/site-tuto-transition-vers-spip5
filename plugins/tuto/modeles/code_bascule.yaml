@@ -1,0 +1,16 @@
+nom: 'Code en onglets'
+categorie:
+  type: 'tuto_mise_en_page'
+  rang: 5
+parametres:
+  - saisie: 'hidden'
+    options: {nom: 'modele', defaut: 'code_bascule'}
+  - saisie: 'radio'
+    options:
+      nom: 'classe'
+      label: 'Marqueur'
+      explication: 'Chaque onglet commence par ce modèle et contient le bloc de code qui le suit. Un dernier modèle « Fin » ferme le groupe.'
+      defaut: ''
+      data: {'': 'Nouvel onglet', fin: 'Fin des onglets'}
+  - saisie: 'input'
+    options: {nom: 'onglet', label: 'Nom de l’onglet', afficher_si: '@classe@ != "fin"'}

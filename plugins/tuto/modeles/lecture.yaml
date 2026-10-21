@@ -1,0 +1,13 @@
+nom: 'Lecture conseillée'
+categorie:
+  type: 'tuto_mise_en_page'
+  rang: 7
+parametres:
+  - saisie: 'hidden'
+    options: {nom: 'modele', defaut: 'lecture'}
+  - saisie: 'input'
+    options: {nom: 'question', label: 'Question ou contexte'}
+  - saisie: 'input'
+    options: {nom: 'titre', label: 'Titre du lien', obligatoire: 'oui'}
+  - saisie: 'input'
+    options: {nom: 'lien', label: 'Adresse', obligatoire: 'oui', type: 'url'}

@@ -1,0 +1,16 @@
+nom: 'Bloc dépliant'
+categorie:
+  type: 'tuto_mise_en_page'
+  rang: 4
+parametres:
+  - saisie: 'hidden'
+    options: {nom: 'modele', defaut: 'depliant'}
+  - saisie: 'radio'
+    options:
+      nom: 'classe'
+      label: 'Marqueur'
+      explication: 'Le texte placé entre le début et la fin est replié sous le titre.'
+      defaut: ''
+      data: {'': 'Début du dépliant', fin: 'Fin du dépliant'}
+  - saisie: 'input'
+    options: {nom: 'titre', label: 'Titre affiché', afficher_si: '@classe@ != "fin"'}

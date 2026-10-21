@@ -7,11 +7,20 @@
 	schema="1.0.0"
 >
 	<nom>SPIP, côté Symfony</nom>
+	<!-- Squelettes, modèles et contenu du guide « SPIP, côté Symfony » -->
 	<auteur>Gilles Vincent</auteur>
 	<licence>GNU/GPL</licence>
 
+	<necessite nom="mots" />
+	<necessite nom="sites" />
+	<necessite nom="yaml" />
 	<necessite nom="tiptap_spip" />
 	<necessite nom="coloration_code" />
 	<necessite nom="inserer_modeles" />
 	<necessite nom="article_accueil" />
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/tuto.php" />
+	<pipeline nom="formulaire_fond" inclure="tuto_pipelines.php" />
+	<pipeline nom="header_prive_css" inclure="tuto_pipelines.php" />
+	<pipeline nom="inserer_modeles_lister_categories" inclure="tuto_pipelines.php" />
 </paquet>

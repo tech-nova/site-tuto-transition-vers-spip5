@@ -1,0 +1,11 @@
+nom: 'Bandeau de composants'
+categorie:
+  type: 'tuto_mise_en_page'
+  rang: 3
+parametres:
+  - saisie: 'hidden'
+    options: {nom: 'modele', defaut: 'composants'}
+  - saisie: 'input'
+    options: {nom: 'principal', label: 'Élément principal', defaut: 'SPIP 5'}
+  - saisie: 'input'
+    options: {nom: 'elements', label: 'Éléments ajoutés', explication: 'Séparés par des virgules.', obligatoire: 'oui'}

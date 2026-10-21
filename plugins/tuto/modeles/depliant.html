@@ -1,0 +1,14 @@
+[(#REM)
+	Bloc dépliant : tout le texte situé entre les deux modèles est replié.
+	<depliant|titre=Petit décodeur de la syntaxe objet>
+	…
+	<depliant|fin>
+	L'assemblage est fait par tuto_post_propre().
+]#SET{prive,#EVAL{test_espace_prive()}}
+[(#ENV{class}|=={fin}|oui)
+	[(#GET{prive}|oui)<div class="tuto-marqueur">Fin du dépliant</div>]
+	[(#GET{prive}|non)<div class="tuto-depliant-fin"></div>]
+][(#ENV{class}|=={fin}|non)
+	[(#GET{prive}|oui)<div class="tuto-marqueur">Dépliant : [(#ENV*{titre}|typo)]</div>]
+	[(#GET{prive}|non)<div class="tuto-depliant" data-titre="[(#ENV*{titre}|typo|attribut_html)]"></div>]
+]

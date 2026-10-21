@@ -86,6 +86,7 @@ for prefixe in "${PLUGINS[@]}"; do
 	fi
 done
 spip plugins:activer "${PLUGINS[@]}" tuto -y
+spip plugins:maj:bdd
 ouvrir_droits
 
 etape "Contenu initial"

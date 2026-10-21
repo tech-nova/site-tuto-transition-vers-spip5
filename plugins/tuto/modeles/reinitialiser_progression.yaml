@@ -1,0 +1,7 @@
+nom: 'Bouton de réinitialisation de la progression'
+categorie:
+  type: 'tuto_mise_en_page'
+  rang: 9
+parametres:
+  - saisie: 'hidden'
+    options: {nom: 'modele', defaut: 'reinitialiser_progression'}

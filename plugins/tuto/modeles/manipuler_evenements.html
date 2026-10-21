@@ -1,0 +1,14 @@
+[(#REM)
+	Simulateur « À manipuler » de l'étape Pipelines & événements :
+	deux listeners indépendants modifient le HTML transmis par affichage_final.
+	<manipuler_evenements|>
+	Le comportement est dans javascript/tuto.js (initEvenements).
+]<div class="demo" data-demo="events">
+	<div class="demo-heading"><span class="mini-label">À MANIPULER</span><span class="demo-tag">Ordre fixé pour l’exemple</span></div>
+	<div class="listener-options">
+		<label class="toggle-row"><span><strong>Listener Signature</strong><small>Ajoute un pied de page</small></span><input type="checkbox" data-listener="signature" checked><span class="switch" aria-hidden="true"></span></label>
+		<label class="toggle-row"><span><strong>Listener Repère</strong><small>Ajoute un attribut au contenu</small></span><input type="checkbox" data-listener="repere"><span class="switch" aria-hidden="true"></span></label>
+	</div>
+	<button class="button dark" type="button" data-dispatch>Déclencher affichage_final <span aria-hidden="true">→</span></button>
+	<div class="event-result" aria-live="polite"><p class="demo-prompt">Le HTML de départ contient simplement « Bonjour SPIP ! ».</p></div>
+</div>

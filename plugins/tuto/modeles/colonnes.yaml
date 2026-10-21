@@ -1,0 +1,49 @@
+nom: 'Colonnes'
+categorie:
+  type: 'tuto_mise_en_page'
+  rang: 1
+parametres:
+  - saisie: 'hidden'
+    options: {nom: 'modele', defaut: 'colonnes'}
+  - saisie: 'radio'
+    options:
+      nom: 'variante'
+      label: 'Présentation'
+      defaut: 'comparaison'
+      data:
+        comparaison: 'Comparaison (étiquette, titre, texte)'
+        definitions: 'Définitions côte à côte'
+        roles: 'Rôles numérotés'
+  - saisie: 'fieldset'
+    options: {nom: 'colonne1', label: 'Colonne 1'}
+    saisies:
+      - saisie: 'input'
+        options: {nom: 'etiquette1', label: 'Étiquette', explication: 'En capitales, par exemple LE PROBLÈME.'}
+      - saisie: 'input'
+        options: {nom: 'titre1', label: 'Titre'}
+      - saisie: 'textarea'
+        options: {nom: 'texte1', label: 'Texte', rows: 3}
+      - saisie: 'input'
+        options: {nom: 'code1', label: 'Code', explication: 'Écrire &amp;gt; à la place de >.'}
+  - saisie: 'fieldset'
+    options: {nom: 'colonne2', label: 'Colonne 2'}
+    saisies:
+      - saisie: 'input'
+        options: {nom: 'etiquette2', label: 'Étiquette'}
+      - saisie: 'input'
+        options: {nom: 'titre2', label: 'Titre'}
+      - saisie: 'textarea'
+        options: {nom: 'texte2', label: 'Texte', rows: 3}
+      - saisie: 'input'
+        options: {nom: 'code2', label: 'Code'}
+  - saisie: 'fieldset'
+    options: {nom: 'colonne3', label: 'Colonne 3 (facultative)'}
+    saisies:
+      - saisie: 'input'
+        options: {nom: 'etiquette3', label: 'Étiquette'}
+      - saisie: 'input'
+        options: {nom: 'titre3', label: 'Titre'}
+      - saisie: 'textarea'
+        options: {nom: 'texte3', label: 'Texte', rows: 3}
+      - saisie: 'input'
+        options: {nom: 'code3', label: 'Code'}

@@ -1,0 +1,17 @@
+[(#REM)
+	Deux ou trois colonnes côte à côte.
+	<colonnes|variante=comparaison|etiquette1=…|titre1=…|texte1=…|code1=…|etiquette2=…>
+	variante : comparaison (défaut), definitions, roles (colonnes numérotées)
+	Dans un paramètre, « > » s'écrit &gt;
+]#SET{classes,#ARRAY{comparaison,comparison,definitions,definition-pair,roles,role-grid}}
+<div class="[(#GET{classes}|table_valeur{#ENV{variante}}|sinon{comparison})]">
+<BOUCLE_colonnes(DATA){source tableau, #ENV*|tuto_colonnes}>
+	<div>
+		[(#ENV{variante}|=={roles}|oui)<span class="role-number">#CLE</span>]
+		[<span class="mini-label">(#VALEUR{etiquette}|typo)</span>]
+		[<h3>(#VALEUR{titre}|typo)</h3>]
+		[(#VALEUR{texte}|propre)]
+		[<code>(#VALEUR{code})</code>]
+	</div>
+</BOUCLE_colonnes>
+</div>

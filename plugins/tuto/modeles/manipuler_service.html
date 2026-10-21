@@ -1,0 +1,23 @@
+[(#REM)
+	Simulateur « À manipuler » de l'étape Services & conteneur :
+	le même service Traceur reçoit un journal du site ou un journal de test.
+	<manipuler_service|>
+	Le comportement est dans javascript/tuto.js (initService).
+]#SET{n,#EVAL{uniqid()}}
+<div class="demo" data-demo="service" data-mode="normal">
+	<div class="demo-heading"><span class="mini-label">À MANIPULER</span><span class="demo-tag">Simulation dans cette page</span></div>
+	<fieldset class="segmented">
+		<legend class="sr-only">Journal à injecter</legend>
+		<label><input type="radio" name="service-mode-#GET{n}" value="normal" checked><span>Journal du site</span></label>
+		<label><input type="radio" name="service-mode-#GET{n}" value="test"><span>Journal de test</span></label>
+	</fieldset>
+	<div class="assembly">
+		<div class="assembly-node dependency"><span class="node-caption">DÉPENDANCE FOURNIE</span><strong data-service-destination data-normal="Journal du site" data-test="Journal en mémoire">Journal du site</strong><small>respecte LoggerInterface</small></div>
+		<span class="assembly-arrow" aria-hidden="true">→</span>
+		<div class="assembly-node"><span class="node-caption">TON SERVICE</span><strong>Traceur</strong><small>son code ne change pas</small></div>
+	</div>
+	<div class="demo-output" aria-live="polite">
+		<span>Message reçu</span><code>Article publié.</code>
+		<p data-service-explication data-normal="Dans un site réel, le journal configuré reçoit le message. Ici, tout reste simulé à l’écran." data-test="Le test peut vérifier le message en mémoire, sans écrire dans le journal du site.">Dans un site réel, le journal configuré reçoit le message. Ici, tout reste simulé à l’écran.</p>
+	</div>
+</div>

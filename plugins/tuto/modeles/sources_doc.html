@@ -1,0 +1,9 @@
+[(#REM)
+	Liste numérotée des pages de la documentation SPIP citées
+	dans les liens « Pour aller plus loin » du parcours.
+	<sources_doc|>
+]<div class="source-list">
+<BOUCLE_sources(SITES){id_secteur=#CONFIG{tuto/id_parcours}}{url_site LIKE %git.spip.net%}{fusion url_site}{par id_syndic}>
+	<a href="#URL_SITE" target="_blank" rel="noopener noreferrer"><span>[(#COMPTEUR_BOUCLE|str_pad{2,0,0})]</span><div><strong>#NOM_SITE</strong><small>[(#URL_SITE|tuto_chemin_doc)]</small></div><b aria-hidden="true">↗</b></a>
+</BOUCLE_sources>
+</div>

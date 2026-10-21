@@ -1,0 +1,13 @@
+nom: 'Titre et légende de code'
+categorie:
+  type: 'tuto_mise_en_page'
+  rang: 6
+parametres:
+  - saisie: 'hidden'
+    options: {nom: 'modele', defaut: 'legende_code'}
+  - saisie: 'explication'
+    options: {nom: 'aide', texte: 'Placer ce modèle juste avant le bloc de code concerné.'}
+  - saisie: 'input'
+    options: {nom: 'titre', label: 'Titre du bloc de code', obligatoire: 'oui'}
+  - saisie: 'input'
+    options: {nom: 'legende', label: 'Légende sous le code'}

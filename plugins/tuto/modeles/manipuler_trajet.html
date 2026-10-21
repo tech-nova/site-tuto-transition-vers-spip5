@@ -1,0 +1,51 @@
+[(#REM)
+	Schéma « Le trajet simplifié d'une visite » de l'étape Le trajet d'une page :
+	cinq étapes à parcourir, de la requête à la réponse.
+	<manipuler_trajet|>
+	Le comportement est dans javascript/tuto.js (initTrajet).
+]<div class="demo http-demo" data-demo="trajet">
+	<div class="demo-heading"><span class="mini-label">LE TRAJET SIMPLIFIÉ D’UNE VISITE</span><span class="demo-tag">Clique sur les étapes</span></div>
+	<div class="http-steps" role="group" aria-label="Étapes du traitement HTTP">
+		<button type="button" data-http-step="0" aria-pressed="true" class="active"><span>1</span>Entrée</button>
+		<button type="button" data-http-step="1" aria-pressed="false"><span>2</span>Démarrage</button>
+		<button type="button" data-http-step="2" aria-pressed="false"><span>3</span>Requête</button>
+		<button type="button" data-http-step="3" aria-pressed="false"><span>4</span>SPIP</button>
+		<button type="button" data-http-step="4" aria-pressed="false"><span>5</span>Réponse</button>
+	</div>
+	<div class="http-detail" aria-live="polite">
+		<div data-http-detail="0">
+			<span class="mini-label">Point d’entrée</span>
+			<h3>Le navigateur demande une page</h3>
+			<code>GET /spip.php?page=article&amp;id_article=12</code>
+			<p>Le point d’entrée reçoit la visite. Le runtime Symfony prépare le lancement du noyau HTTP SPIP. Ce schéma résume le chemin documenté, sans détailler chaque classe.</p>
+		</div>
+		<div data-http-detail="1" hidden>
+			<span class="mini-label">Kernel de démarrage</span>
+			<h3>SPIP prépare les outils communs</h3>
+			<code>Cœur + plugins actifs → conteneur</code>
+			<p>Le démarrage charge le conteneur compilé ou le recompile si nécessaire. Les services et listeners doivent être prêts avant le traitement de la requête.</p>
+		</div>
+		<div data-http-detail="2" hidden>
+			<span class="mini-label">Request + noyau HTTP</span>
+			<h3>La requête est représentée par un objet</h3>
+			<code>URL · paramètres · en-têtes</code>
+			<p>Le noyau HTTP prend en charge la Request. La requête courante est accessible pendant le traitement via RequestStack. Le routage détermine quel contrôleur appeler.</p>
+		</div>
+		<div data-http-detail="3" hidden>
+			<span class="mini-label">Contrôleur → code SPIP</span>
+			<h3>Le traitement SPIP produit le contenu</h3>
+			<code>Squelettes · formulaires · pipelines</code>
+			<p>Le contrôleur peut déléguer aux handlers qui exécutent le code historique de SPIP. Le mécanisme de publication reste encore largement présent derrière cette nouvelle entrée.</p>
+		</div>
+		<div data-http-detail="4" hidden>
+			<span class="mini-label">Response</span>
+			<h3>Une réponse revient au navigateur</h3>
+			<code>Contenu + statut + en-têtes</code>
+			<p>Le contenu produit peut être capturé puis placé dans une Response. Le cycle HTTP transmet cette réponse au navigateur. Le site continue d’afficher une page SPIP.</p>
+		</div>
+	</div>
+	<div class="http-controls">
+		<button type="button" class="text-button" data-http-prev disabled>← Étape précédente</button>
+		<button type="button" class="text-button" data-http-next>Étape suivante →</button>
+	</div>
+</div>

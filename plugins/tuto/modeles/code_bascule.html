@@ -1,0 +1,17 @@
+[(#REM)
+	Blocs de code présentés en onglets : chaque modèle ouvre un onglet,
+	le dernier ferme le groupe.
+	<code_bascule|onglet=Repère SPIP 4>
+	```php … ```
+	<code_bascule|onglet=Forme SPIP 5>
+	```php … ```
+	<code_bascule|fin>
+	L'assemblage est fait par tuto_post_propre().
+]#SET{prive,#EVAL{test_espace_prive()}}
+[(#ENV{class}|=={fin}|oui)
+	[(#GET{prive}|oui)<div class="tuto-marqueur">Fin des onglets</div>]
+	[(#GET{prive}|non)<div class="tuto-onglets-fin"></div>]
+][(#ENV{class}|=={fin}|non)
+	[(#GET{prive}|oui)<div class="tuto-marqueur">Onglet : [(#ENV*{onglet}|typo)]</div>]
+	[(#GET{prive}|non)<div class="tuto-onglet" data-onglet="[(#ENV*{onglet}|typo|attribut_html)]"></div>]
+]

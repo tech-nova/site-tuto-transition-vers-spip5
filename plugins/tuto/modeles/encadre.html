@@ -1,0 +1,8 @@
+[(#REM)
+	Encadré avec une étiquette.
+	<encadre|etiquette=LE REPÈRE ESSENTIEL|texte=…|couleur=sable>
+	couleur : violet (défaut) ou sable
+]<aside class="note[ (#ENV{couleur}|=={sable}|oui)sand]">
+	[<span class="note-label">(#ENV*{etiquette}|typo)</span>]
+	<div>[(#ENV*{texte}|propre)]</div>
+</aside>

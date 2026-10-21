@@ -1,0 +1,7 @@
+[(#REM)
+	Bandeau d'éléments assemblés.
+	<composants|principal=SPIP 5|elements=Conteneur de services, Event Dispatcher, HTTP>
+]<div class="component-strip">
+	[<span>(#ENV*{principal}|typo)</span><b>+</b>]
+	<BOUCLE_elements(DATA){source tableau, #ENV*{elements}|explode{','}}>[<span>(#VALEUR|trim|typo)</span>]</BOUCLE_elements>
+</div>

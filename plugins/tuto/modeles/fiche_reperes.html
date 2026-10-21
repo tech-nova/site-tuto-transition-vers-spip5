@@ -1,0 +1,9 @@
+[(#REM)
+	Liste d'idées à cocher, mémorisées dans le navigateur.
+	<fiche_reperes|repere1=Un service est un objet auquel on confie une tâche.|repere2=…>
+	Jusqu'à six repères. Chaque case est identifiée par son texte.
+]<div class="confidence-list">
+<BOUCLE_reperes(DATA){source tableau, #ENV*|tuto_parametres_numerotes{repere,6}}>
+	<label><input type="checkbox" data-confidence="[(#VALEUR|md5|substr{0,10})]"><span>[(#VALEUR|typo)]</span></label>
+</BOUCLE_reperes>
+</div>

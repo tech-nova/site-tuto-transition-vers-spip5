@@ -1,0 +1,7 @@
+nom: 'Liste des sources de la documentation'
+categorie:
+  type: 'tuto_mise_en_page'
+  rang: 8
+parametres:
+  - saisie: 'hidden'
+    options: {nom: 'modele', defaut: 'sources_doc'}
