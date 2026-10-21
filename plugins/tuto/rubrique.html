@@ -2,7 +2,7 @@
 	Rubrique : une étape du parcours, ou la page « Sources & méthode ».
 	Le secteur du parcours renvoie à l'accueil.
 ]<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
-[(#ID_RUBRIQUE|=={#CONFIG{tuto/id_parcours}}|oui)[(#URL_SITE_SPIP|concat{/}|redirige_par_entete)]]
+[(#ID_RUBRIQUE|=={#CONFIG{tuto/id_parcours}}|oui)[(#URL_SITE_SPIP|concat{/}|tuto_rediriger)]]
 <!doctype html>
 <html lang="#LANG" dir="#LANG_DIR">
 <head>

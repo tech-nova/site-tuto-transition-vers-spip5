@@ -2,7 +2,7 @@
 	Article : l'article d'accueil d'une rubrique renvoie vers sa rubrique,
 	les autres s'affichent comme une page simple.
 ]<BOUCLE_article(ARTICLES){id_article}>
-<BOUCLE_accueil(RUBRIQUES){id_rubrique}{id_article_accueil=#ID_ARTICLE}>[(#URL_RUBRIQUE|url_absolue|redirige_par_entete)]</BOUCLE_accueil>
+<BOUCLE_accueil(RUBRIQUES){id_rubrique}{id_article_accueil=#ID_ARTICLE}>[(#ID_RUBRIQUE|=={#CONFIG{tuto/id_parcours}}|?{#URL_SITE_SPIP,#URL_RUBRIQUE}|tuto_rediriger)]</BOUCLE_accueil>
 <!doctype html>
 <html lang="#LANG" dir="#LANG_DIR">
 <head>

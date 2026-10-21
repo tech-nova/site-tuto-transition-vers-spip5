@@ -248,3 +248,19 @@ function tuto_etape_voisine($id_rubrique, int $sens): int {
 function tuto_deux_chiffres($nombre): string {
 	return str_pad((string) (int) $nombre, 2, '0', STR_PAD_LEFT);
 }
+
+/**
+ * Redirige (301) vers une URL et arrête le calcul de la page
+ *
+ * La page n'est donc jamais mise en cache : chaque visite est redirigée.
+ *
+ * @filtre
+ */
+function tuto_rediriger(string $url): string {
+	if ($url !== '') {
+		include_spip('inc/headers');
+		redirige_par_entete(url_absolue($url), '', 301);
+	}
+
+	return '';
+}
