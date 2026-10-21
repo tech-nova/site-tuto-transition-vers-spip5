@@ -1,0 +1,60 @@
+[(#REM)
+	Accueil : l'article d'accueil du secteur « parcours » et la liste des étapes
+]<BOUCLE_parcours(RUBRIQUES){id_rubrique=#CONFIG{tuto/id_parcours}}>
+<!doctype html>
+<html lang="#LANG" dir="#LANG_DIR">
+<head>
+<INCLURE{fond=inclure/head}{titre=Une introduction en douceur}>
+</head>
+<body>
+	<a class="skip-link" href="#main">Aller au contenu</a>
+	<INCLURE{fond=inclure/entete}{fil=Bienvenue}>
+	<div class="workspace">
+		<main id="main" class="main" tabindex="-1">
+		<div class="home-page">
+			<BOUCLE_accueil(ARTICLES){id_article=#ID_ARTICLE_ACCUEIL}>
+			<section class="hero">
+				<div class="hero-copy">
+					[<p class="eyebrow">(#SURTITRE)</p>]
+					<h1 tabindex="-1">#TITRE</h1>
+					[<div class="hero-intro">(#CHAPO)</div>]
+					<div class="hero-actions">
+						<BOUCLE_premiere(RUBRIQUES){id_parent=#CONFIG{tuto/id_parcours}}{par num titre, titre}{0,1}>
+						<a class="button primary" id="start-course" href="#URL_RUBRIQUE">Commencer le parcours <span aria-hidden="true">→</span></a>
+						</BOUCLE_premiere>
+						<button type="button" class="text-button" data-open-glossary>Ouvrir le lexique</button>
+					</div>
+					<p class="hero-meta"><span>[(#VAL|tuto_etapes|count)] courtes étapes</span><span>À ton rythme</span><span>Aucun prérequis Symfony</span></p>
+				</div>
+			</section>
+			[<aside class="reassurance">(#TEXTE)</aside>]
+			</BOUCLE_accueil>
+			<section class="curriculum">
+				<div class="section-heading">
+					<div><p class="eyebrow">Le parcours</p><h2>Six petits pas pour prendre ses repères.</h2></div>
+					<p>Un problème connu, une idée nouvelle, un exemple concret.</p>
+				</div>
+				<div class="course-list">
+				<BOUCLE_etapes(RUBRIQUES){id_parent=#CONFIG{tuto/id_parcours}}{par num titre, titre}>
+					<a href="#URL_RUBRIQUE" class="course-row" data-course-lesson="#ID_RUBRIQUE">
+						<span class="course-index" data-numero="[(#COMPTEUR_BOUCLE|tuto_deux_chiffres)]">[(#COMPTEUR_BOUCLE|tuto_deux_chiffres)]</span>
+						<div><h3>[(#TITRE|supprimer_numero)]</h3>[<p>(#DESCRIPTIF|PtoBR)</p>]</div>
+						<BOUCLE_temps(ARTICLES){id_article=#ID_ARTICLE_ACCUEIL}><span class="course-time">[(#TEXTE|tuto_temps_lecture)] min</span></BOUCLE_temps>
+						<span class="course-arrow" aria-hidden="true">→</span>
+					</a>
+				</BOUCLE_etapes>
+				</div>
+			</section>
+			<section class="home-end">
+				<div><h2>Un mot t’échappe ?</h2><p>Le lexique explique les termes en français, avec des rapprochements concrets.</p></div>
+				<button class="button secondary" type="button" data-open-glossary>Consulter le lexique <span aria-hidden="true">→</span></button>
+			</section>
+		</div>
+		</main>
+		<INCLURE{fond=inclure/pied}>
+	</div>
+	<INCLURE{fond=inclure/lexique}>
+	<div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+</body>
+</html>
+</BOUCLE_parcours>

@@ -1,0 +1,24 @@
+[(#REM)
+	Article : l'article d'accueil d'une rubrique renvoie vers sa rubrique,
+	les autres s'affichent comme une page simple.
+]<BOUCLE_article(ARTICLES){id_article}>
+<BOUCLE_accueil(RUBRIQUES){id_rubrique}{id_article_accueil=#ID_ARTICLE}>[(#URL_RUBRIQUE|url_absolue|redirige_par_entete)]</BOUCLE_accueil>
+<!doctype html>
+<html lang="#LANG" dir="#LANG_DIR">
+<head>
+<INCLURE{fond=inclure/head}{titre=#TITRE}>
+</head>
+<body>
+	<a class="skip-link" href="#main">Aller au contenu</a>
+	<INCLURE{fond=inclure/entete}{id_rubrique}{fil=#TITRE}>
+	<div class="workspace">
+		<main id="main" class="main" tabindex="-1">
+			<INCLURE{fond=inclure/page}{id_article}>
+		</main>
+		<INCLURE{fond=inclure/pied}>
+	</div>
+	<INCLURE{fond=inclure/lexique}>
+	<div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+</body>
+</html>
+</BOUCLE_article>

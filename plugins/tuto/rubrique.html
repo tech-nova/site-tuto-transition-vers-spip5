@@ -1,0 +1,28 @@
+[(#REM)
+	Rubrique : une étape du parcours, ou la page « Sources & méthode ».
+	Le secteur du parcours renvoie à l'accueil.
+]<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+[(#ID_RUBRIQUE|=={#CONFIG{tuto/id_parcours}}|oui)[(#URL_SITE_SPIP|concat{/}|redirige_par_entete)]]
+<!doctype html>
+<html lang="#LANG" dir="#LANG_DIR">
+<head>
+<INCLURE{fond=inclure/head}{titre=#TITRE|supprimer_numero}{description=#DESCRIPTIF}>
+</head>
+<body>
+	<a class="skip-link" href="#main">Aller au contenu</a>
+	<INCLURE{fond=inclure/entete}{id_rubrique}{fil=#TITRE|supprimer_numero}>
+	<div class="workspace">
+		<main id="main" class="main" tabindex="-1">
+		[(#ID_PARENT|=={#CONFIG{tuto/id_parcours}}|oui)
+			<INCLURE{fond=inclure/lecon}{id_rubrique}>
+		][(#ID_PARENT|=={#CONFIG{tuto/id_parcours}}|non)
+			<INCLURE{fond=inclure/page}{id_article=#ID_ARTICLE_ACCUEIL}>
+		]
+		</main>
+		<INCLURE{fond=inclure/pied}>
+	</div>
+	<INCLURE{fond=inclure/lexique}>
+	<div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+</body>
+</html>
+</BOUCLE_rubrique>

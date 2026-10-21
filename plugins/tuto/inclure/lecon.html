@@ -1,0 +1,49 @@
+[(#REM)
+	Une étape du parcours : son article d'accueil, l'idée à retenir,
+	le bouton « lu », les liens « Pour aller plus loin » et la navigation.
+	Paramètres : id_rubrique
+]<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+#SET{rang,#ID_RUBRIQUE|tuto_etape_rang}
+#SET{total,#VAL|tuto_etapes|count}
+#SET{precedente,#ID_RUBRIQUE|tuto_etape_voisine{-1}}
+#SET{suivante,#ID_RUBRIQUE|tuto_etape_voisine{1}}
+<BOUCLE_article(ARTICLES){id_article=#ID_ARTICLE_ACCUEIL}>
+<article class="lesson-page">
+	<header class="lesson-header">
+		<div class="lesson-meta"><span class="chapter-badge">ÉTAPE [(#GET{rang}|tuto_deux_chiffres)] / [(#GET{total}|tuto_deux_chiffres)]</span><span>[(#TEXTE|tuto_temps_lecture)] min de lecture environ</span></div>
+		[<div class="eyebrow">(#SURTITRE)</div>]
+		<h1 tabindex="-1">#TITRE</h1>
+		[<div class="lesson-deck">(#CHAPO)</div>]
+	</header>
+	<div class="lesson-body">[(#TEXTE|tuto_assembler)]</div>
+	[<aside class="takeaway"><span class="takeaway-symbol" aria-hidden="true">✳</span><div><span class="mini-label">S’IL NE FALLAIT RETENIR QU’UNE IDÉE</span>(#PS)</div></aside>]
+	<div class="complete-row">
+		<button type="button" id="complete-lesson" data-lesson="#ID_RUBRIQUE" aria-pressed="false" class="complete-button"><span class="complete-check" aria-hidden="true">+</span><span>Marquer cette étape comme lue</span></button>
+		<span>L’étape suivante valide aussi ta lecture.</span>
+	</div>
+	<B_liens>
+	<aside class="lesson-sources">
+		<span class="mini-label">POUR ALLER PLUS LOIN</span>
+		<h2>Retour à la documentation</h2>
+		<div>
+		<BOUCLE_liens(SITES){id_rubrique}{par id_syndic}>
+			<a href="#URL_SITE" target="_blank" rel="noopener noreferrer">#NOM_SITE <span aria-hidden="true">↗</span></a>
+		</BOUCLE_liens>
+		</div>
+	</aside>
+	</B_liens>
+	<nav class="lesson-bottom-nav" aria-label="Passer d’une leçon à l’autre">
+		<BOUCLE_precedente(RUBRIQUES){id_rubrique=#GET{precedente}}>
+		<a href="#URL_RUBRIQUE" class="previous-lesson"><span>← Précédent</span><strong>[(#TITRE|supprimer_numero)]</strong></a>
+		</BOUCLE_precedente>
+		<a href="#URL_SITE_SPIP/" class="previous-lesson"><span>← Précédent</span><strong>Bienvenue</strong></a>
+		<//B_precedente>
+		<BOUCLE_suivante(RUBRIQUES){id_rubrique=#GET{suivante}}>
+		<a href="#URL_RUBRIQUE" class="next-lesson" data-complete-lesson="#_rubrique:ID_RUBRIQUE"><span>Étape suivante →</span><strong>[(#TITRE|supprimer_numero)]</strong></a>
+		</BOUCLE_suivante>
+		<a href="#URL_SITE_SPIP/" class="next-lesson" data-complete-lesson="#ID_RUBRIQUE"><span>Retour à l’accueil →</span><strong>Terminer et revoir le parcours</strong></a>
+		<//B_suivante>
+	</nav>
+</article>
+</BOUCLE_article>
+</BOUCLE_rubrique>

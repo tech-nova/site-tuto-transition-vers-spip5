@@ -1,0 +1,34 @@
+[(#REM)
+	En-tête et barre latérale : marque, lexique, étapes du parcours, progression
+	Paramètres : id_rubrique (rubrique affichée), fil (texte du fil d'Ariane)
+]<header class="site-header">
+	<div class="topbar">
+		<a class="brand" href="#URL_SITE_SPIP/" aria-label="[(#NOM_SITE_SPIP|textebrut|attribut_html)] — accueil">
+			<svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true"><rect x="3" y="3" width="24" height="24" rx="8" fill="#563777"/><rect x="14" y="14" width="23" height="23" rx="8" fill="#9877b6"/><path d="m13 10-5 5 5 5m14 0 5 5-5 5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+			<span>#NOM_SITE_SPIP[<small>(#SLOGAN_SITE_SPIP)</small>]</span>
+		</a>
+		<div class="header-actions">
+			<button class="menu-button" id="menu-button" type="button" aria-label="Ouvrir le parcours" aria-controls="sidebar" aria-expanded="false">Le parcours <span aria-hidden="true">⌄</span></button>
+			<button id="open-glossary" type="button" class="glossary-button">Le lexique <kbd aria-hidden="true">/</kbd></button>
+		</div>
+	</div>
+	<aside class="sidebar" id="sidebar" aria-label="Parcours pédagogique">
+		<div class="navigation-heading"><p class="sidebar-eyebrow">Le parcours</p><button class="nav-close text-button" id="nav-close" type="button" aria-label="Fermer le parcours">Fermer <span aria-hidden="true">×</span></button></div>
+		<nav aria-label="Navigation principale" id="course-nav">
+		<BOUCLE_etapes(RUBRIQUES){id_parent=#CONFIG{tuto/id_parcours}}{par num titre, titre}>
+			<a href="#URL_RUBRIQUE" data-lesson="#ID_RUBRIQUE"[(#ID_RUBRIQUE|=={#ENV{id_rubrique}}|oui) aria-current="page"]><span class="nav-num">[(#COMPTEUR_BOUCLE|tuto_deux_chiffres)]</span><span>[(#TITRE|supprimer_numero)]</span></a>
+		</BOUCLE_etapes>
+		</nav>
+	</aside>
+	<div class="reading-status">
+		<div class="breadcrumbs"><span>SPIP 5.0</span><span aria-hidden="true">/</span><strong>[(#ENV{fil,Bienvenue})]</strong></div>
+		<div class="sidebar-progress">
+			<div><span>Ton parcours</span><strong id="progress-count" role="status" aria-live="polite">0 / [(#VAL|tuto_etapes|count)]</strong></div>
+			<progress id="course-progress" max="[(#VAL|tuto_etapes|count)]" value="0" aria-label="Leçons marquées comme lues"></progress>
+			<small id="storage-note">À ton rythme, une idée à la fois.</small>
+		</div>
+		<BOUCLE_sources(RUBRIQUES){id_rubrique=#CONFIG{tuto/id_sources}}>
+		<a href="#URL_RUBRIQUE" class="source-nav[(#ID_RUBRIQUE|=={#ENV{id_rubrique}}|oui) selected]"[(#ID_RUBRIQUE|=={#ENV{id_rubrique}}|oui) aria-current="page"]>[(#TITRE|supprimer_numero)] <span aria-hidden="true">↗</span></a>
+		</BOUCLE_sources>
+	</div>
+</header>

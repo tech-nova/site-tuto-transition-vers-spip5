@@ -1,0 +1,39 @@
+[(#REM)
+	Mot du lexique : page de repli quand le JavaScript ne peut pas ouvrir le lexique
+]<BOUCLE_mot(MOTS){id_mot}>
+<!doctype html>
+<html lang="#LANG" dir="#LANG_DIR">
+<head>
+<INCLURE{fond=inclure/head}{titre=#TITRE}{description=#DESCRIPTIF}>
+</head>
+<body>
+	<a class="skip-link" href="#main">Aller au contenu</a>
+	<INCLURE{fond=inclure/entete}{fil=Le lexique}>
+	<div class="workspace">
+		<main id="main" class="main" tabindex="-1">
+			<article class="lesson-page">
+				<header class="lesson-header">
+					<div class="eyebrow">LE PETIT LEXIQUE</div>
+					<h1 tabindex="-1">#TITRE</h1>
+					[<div class="lesson-deck">(#DESCRIPTIF)</div>]
+				</header>
+				[<div class="glossary-entry"><p class="glossary-analogy">(#TEXTE|textebrut)</p></div>]
+				<B_etapes>
+				<aside class="lesson-sources">
+					<span class="mini-label">REVOIR DANS LE PARCOURS</span>
+					<div>
+					<BOUCLE_etapes(RUBRIQUES){id_mot}{par num titre}>
+						<a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)] <span aria-hidden="true">→</span></a>
+					</BOUCLE_etapes>
+					</div>
+				</aside>
+				</B_etapes>
+			</article>
+		</main>
+		<INCLURE{fond=inclure/pied}>
+	</div>
+	<INCLURE{fond=inclure/lexique}>
+	<div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+</body>
+</html>
+</BOUCLE_mot>

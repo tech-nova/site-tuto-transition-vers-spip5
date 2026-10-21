@@ -1,0 +1,13 @@
+[(#REM)
+	En-tête HTML commun
+	Paramètres : titre (titre de la page), description
+]<meta charset="#CHARSET">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fbfaf7">
+<title>[(#ENV{titre}|textebrut) — ]#NOM_SITE_SPIP</title>
+[<meta name="description" content="(#ENV{description,#DESCRIPTIF_SITE_SPIP}|textebrut|attribut_html)">]
+<link rel="icon" href="#CHEMIN{images/favicon.svg}" type="image/svg+xml">
+#INSERT_HEAD_CSS
+<link rel="stylesheet" href="[(#CHEMIN{css/tuto.css}|timestamp)]">
+#INSERT_HEAD
+<script src="[(#CHEMIN{javascript/tuto.js}|timestamp)]" defer></script>

@@ -13,7 +13,7 @@ _ Contrôle le message reçu par le journal. Pour déclencher la classe depuis u
 
 {{{Les deux branchements à ne pas confondre}}}
 
-<colonnes|variante=definitions|etiquette1=TROUVER LA CLASSE|titre1=Autoload / PSR-4|texte1=Fait correspondre un nom de classe à un fichier. Par exemple, le préfixe `MonPlugin\` pointe vers le dossier `src/`.|etiquette2=ASSEMBLER LES OBJETS|titre2=Conteneur de services|texte2=Enregistre les classes utilisables comme services et prépare leurs dépendances. Trouver le fichier ne suffit pas à enregistrer le service.>
+<colonnes|variante=definitions|etiquette1=TROUVER LA CLASSE|titre1=Autoload / PSR-4|texte1=Fait correspondre un nom de classe à un fichier. Par exemple, le préfixe `MonPlugin\ ` pointe vers le dossier `src/`.|etiquette2=ASSEMBLER LES OBJETS|titre2=Conteneur de services|texte2=Enregistre les classes utilisables comme services et prépare leurs dépendances. Trouver le fichier ne suffit pas à enregistrer le service.>
 
 <depliant|titre=Voir les petits fichiers de configuration>
 

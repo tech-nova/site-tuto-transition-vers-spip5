@@ -1,0 +1,15 @@
+[(#REM)
+	Page simple (Sources & méthode, article hors parcours)
+	Paramètres : id_article
+]<BOUCLE_article(ARTICLES){id_article}>
+<article class="lesson-page sources-page">
+	<header class="lesson-header">
+		[<div class="eyebrow">(#SURTITRE)</div>]
+		<h1 tabindex="-1">#TITRE</h1>
+		[<div class="lesson-deck">(#CHAPO)</div>]
+	</header>
+	<div class="lesson-body">[(#TEXTE|tuto_assembler)]</div>
+	[<div class="lesson-ps">(#PS)</div>]
+	<a class="button primary" href="#URL_SITE_SPIP/">Revenir au parcours <span aria-hidden="true">→</span></a>
+</article>
+</BOUCLE_article>

@@ -1,0 +1,26 @@
+[(#REM)
+	Fenêtre du lexique : les mots du groupe « Lexique »
+	La recherche et l'ouverture sont gérées par javascript/tuto.js.
+]<dialog class="glossary-dialog" id="glossary-dialog" aria-labelledby="glossary-title">
+	<div class="glossary-header"><div><span class="mini-label">Les mots, simplement</span><h2 id="glossary-title">Le petit lexique</h2></div><button type="button" class="icon-button close-dialog" aria-label="Fermer le lexique">×</button></div>
+	<div class="glossary-search"><label class="sr-only" for="glossary-search">Rechercher un mot ou une idée</label><input id="glossary-search" type="search" placeholder="Service, façade, listener…" autocomplete="off" spellcheck="false"></div>
+	<p class="glossary-count" id="glossary-count" aria-live="polite"></p>
+	<div id="glossary-results" class="glossary-results">
+	<BOUCLE_mots(MOTS){id_groupe=#CONFIG{tuto/id_groupe_lexique}}{par titre}>
+		<article class="glossary-entry" data-url="#URL_MOT" data-nom="[(#TITRE|textebrut|attribut_html)]" data-recherche="[(#TITRE|textebrut|attribut_html)] [(#SYNONYMES|attribut_html)] [(#DESCRIPTIF|textebrut|attribut_html)]">
+			<h3>#TITRE</h3>
+			[<p>(#DESCRIPTIF|textebrut)</p>]
+			[<p class="glossary-analogy">(#TEXTE|textebrut)</p>]
+			<BOUCLE_etape(RUBRIQUES){id_mot}{par num titre}{0,1}>
+			<a href="#URL_RUBRIQUE">Revoir dans le parcours <span aria-hidden="true">↗</span></a>
+			</BOUCLE_etape>
+		</article>
+	</BOUCLE_mots>
+		<div class="empty-glossary" hidden>
+			<h3>Ce mot n’est pas encore dans le lexique.</h3>
+			<p>Essaie un terme plus court, en français ou en anglais.</p>
+			<button type="button" class="text-button" id="clear-glossary">Voir tous les mots →</button>
+		</div>
+	</div>
+	<div class="glossary-bottom">Les mots soulignés dans les leçons ouvrent ce lexique.</div>
+</dialog>

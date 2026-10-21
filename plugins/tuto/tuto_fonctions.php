@@ -60,11 +60,14 @@ function tuto_normaliser(string $texte): string {
 
 /**
  * Durée de lecture estimée d'un texte, en minutes
+ *
+ * Environ 100 mots par minute : une lecture attentive, avec du code et
+ * des démonstrations à manipuler.
  */
 function tuto_temps_lecture(string $texte): int {
-	$mots = str_word_count(translitteration(textebrut($texte)));
+	$mots = count(preg_split('/\s+/u', trim(textebrut($texte))));
 
-	return max(1, (int) round($mots / 200));
+	return max(1, (int) round($mots / 100));
 }
 
 /**
@@ -199,4 +202,49 @@ function tuto_parametres_numerotes($env, string $nom, int $max): array {
 	}
 
 	return $valeurs;
+}
+
+/**
+ * Identifiants des étapes du parcours, dans l'ordre
+ *
+ * Les étapes sont les sous-rubriques publiées du secteur « parcours ».
+ */
+function tuto_etapes(): array {
+	static $etapes = null;
+	if ($etapes === null) {
+		$etapes = array_map('intval', array_column(sql_allfetsel(
+			'id_rubrique',
+			'spip_rubriques',
+			'id_parent=' . (int) lire_config('tuto/id_parcours') . " AND statut='publie'",
+			'',
+			'0+titre, titre'
+		), 'id_rubrique'));
+	}
+
+	return $etapes;
+}
+
+/**
+ * Rang d'une étape dans le parcours (1, 2…), 0 si ce n'est pas une étape
+ */
+function tuto_etape_rang($id_rubrique): int {
+	$rang = array_search((int) $id_rubrique, tuto_etapes(), true);
+
+	return $rang === false ? 0 : $rang + 1;
+}
+
+/**
+ * Étape précédente (-1) ou suivante (+1) ; 0 en début ou fin de parcours
+ */
+function tuto_etape_voisine($id_rubrique, int $sens): int {
+	$rang = tuto_etape_rang($id_rubrique);
+
+	return $rang ? (tuto_etapes()[$rang - 1 + $sens] ?? 0) : 0;
+}
+
+/**
+ * Nombre sur deux chiffres : 1 → 01
+ */
+function tuto_deux_chiffres($nombre): string {
+	return str_pad((string) (int) $nombre, 2, '0', STR_PAD_LEFT);
 }

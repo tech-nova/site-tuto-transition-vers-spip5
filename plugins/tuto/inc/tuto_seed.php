@@ -3,7 +3,7 @@
 /**
  * Contenu initial du site, lu dans le répertoire seed/ du dépôt
  *
- * - site.yaml : réglages (metas) ;
+ * - site.yaml : réglages (metas et configurations de plugins) ;
  * - rubriques.yaml : rubriques, article d'accueil de chacune, liens « Pour aller plus loin » ;
  * - lexique.yaml : groupe de mots-clés « Lexique » et ses mots, liés aux rubriques ;
  * - textes/*.spip : textes des articles ;
@@ -36,6 +36,9 @@ function tuto_seed(string $dir, bool $maj, callable $journal): void {
 	$site = yaml_decode_file("$dir/site.yaml");
 	foreach ($site['metas'] as $nom => $valeur) {
 		ecrire_meta($nom, $valeur);
+	}
+	foreach ($site['config'] ?? [] as $chemin => $valeur) {
+		ecrire_config($chemin, $valeur);
 	}
 	$journal('Réglages du site');
 

@@ -49,7 +49,7 @@
     - cle: facade
       titre: '03. La façade Spip'
       url: facade
-      descriptif: 'Lire Spip:: et comprendre quand préférer l’injection.'
+      descriptif: 'Lire `Spip::` et comprendre quand préférer l’injection.'
       article:
         surtitre: 'FAIRE LE LIEN AVEC L’EXISTANT'
         titre: 'Un guichet pour le code que tu connais.'

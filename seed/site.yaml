@@ -3,9 +3,13 @@ metas:
   nom_site: 'SPIP, côté Symfony'
   slogan_site: 'Le petit guide pour les développeurs SPIP'
   descriptif_site: 'Une introduction douce aux composants Symfony dans SPIP 5. Services, conteneur, façade et événements, expliqués à partir de vos repères SPIP.'
-  type_urls: 'propres'
+  type_urls: 'libres'
   articles_surtitre: 'oui'
   articles_chapeau: 'oui'
   articles_ps: 'oui'
   activer_sites: 'oui'
   proposer_sites: '2'
+# Configurations de plugins (ecrire_config)
+config:
+  coloration_code/themes_choix: 'styles/a11y-light.min.css'
+  coloration_code/themes_extra: ''
